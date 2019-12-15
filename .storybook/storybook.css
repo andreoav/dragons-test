@@ -1,9 +1,4 @@
-html,
-body {
-  height: 100%;
-}
-
 #root {
-  height: 100vh;
+  padding: 8px;
   font-family: 'Marcellus', 'Cardo', sans-serif;
 }
