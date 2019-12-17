@@ -1,6 +1,30 @@
-import tw from 'tailwind.macro';
-import styled from '@emotion/styled/macro';
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-export const Title = styled.h1`
-  ${tw`text-bold text-2xl sm:text-3xl`};
-`;
+import { Title as BaseTitle } from './styles';
+
+export function Title({ className, variant, children, ...props }) {
+  const titleClasses = classNames(
+    {
+      [`is-${variant}`]: true,
+    },
+    className
+  );
+
+  return (
+    <BaseTitle className={titleClasses} {...props}>
+      {children}
+    </BaseTitle>
+  );
+}
+
+Title.defaultProps = {
+  className: '',
+  variant: 'white',
+};
+
+Title.propTypes = {
+  className: PropTypes.string,
+  variant: PropTypes.oneOf(['white', 'dark']).isRequired,
+};

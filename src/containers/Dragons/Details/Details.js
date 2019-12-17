@@ -1,12 +1,16 @@
 import React from 'react';
 import { navigate } from '@reach/router';
+import { parseISO, format } from 'date-fns';
 
 import useRequest from 'utils/useRequest';
 import { removeDragon } from 'api/dragons';
 
+import { Text } from 'components/Text';
 import { Title } from 'components/Title';
 import { Button } from 'components/Button';
-import { Text } from 'components/Text';
+import { Content } from 'components/Content';
+import { Card } from 'components/Card';
+import { Icon } from 'components/Icon';
 
 export default function DragonDetails({ dragonId }) {
   const { data: dragon } = useRequest(dragonId ? `v1/dragon/${dragonId}` : null);
@@ -17,18 +21,22 @@ export default function DragonDetails({ dragonId }) {
   }
 
   return dragon ? (
-    <React.Fragment>
-      <Title className="text-gray-100">
-        <i className="fas fa-dragon"></i> {dragon.name}
-      </Title>
-      <div className="my-4">
-        <Text>
-          <i className="fas fa-dna"></i> Type: <strong>{dragon.type}</strong>
-        </Text>
-        <Text>
-          <i className="far fa-clock"></i> Date: <strong>{dragon.createdAt}</strong>
-        </Text>
-      </div>
+    <Content>
+      <Card>
+        <Card.Content>
+          <Title variant="dark">
+            <Icon name="fas fa-dragon" /> {dragon.name}
+          </Title>
+          <div className="my-4">
+            <Text>
+              <Icon name="fas fa-dna" /> <strong>{dragon.type}</strong>
+            </Text>
+            <Text>
+              <Icon className="far fa-clock" /> <strong>{format(parseISO(dragon.createdAt), 'PPpp	')}</strong>
+            </Text>
+          </div>
+        </Card.Content>
+      </Card>
       <footer className="flex mt-4">
         <Button onClick={() => navigate(`${dragon.id}/edit`)} className="mr-2">
           <i className="far fa-edit mr-2"></i> Edit
@@ -37,6 +45,6 @@ export default function DragonDetails({ dragonId }) {
           <i className="far fa-trash-alt mr-2"></i> Remove
         </Button>
       </footer>
-    </React.Fragment>
+    </Content>
   ) : null;
 }

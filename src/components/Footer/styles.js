@@ -3,4 +3,8 @@ import styled from '@emotion/styled/macro';
 
 export const Footer = styled.footer`
   ${tw`flex items-center justify-center text-gray-100`};
+
+  > :not(:last-child) {
+    ${tw`mr-2`};
+  }
 `;

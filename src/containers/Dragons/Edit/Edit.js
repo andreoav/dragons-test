@@ -9,13 +9,15 @@ import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 
 import useRequest from 'utils/useRequest';
+
+import { schema } from './schema';
 import { editDragon } from 'api/dragons';
 
 export default function EditDragon({ dragonId }) {
   const { data: dragon } = useRequest(dragonId ? `v1/dragon/${dragonId}` : null, { suspense: true });
 
   const formik = useFormik({
-    // validationSchema: schema,
+    validationSchema: schema,
     initialValues: { name: dragon.name, type: dragon.type },
     onSubmit: async (values, { setSubmitting }) => {
       try {

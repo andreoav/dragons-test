@@ -7,12 +7,14 @@ import { navigate } from '@reach/router';
 import { Card } from 'components/Card';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
-import { createDragon } from 'api/dragons';
 import { Title } from 'components/Title';
+
+import { schema } from './schema';
+import { createDragon } from 'api/dragons';
 
 export default function CreateDragon() {
   const formik = useFormik({
-    // validationSchema: schema,
+    validationSchema: schema,
     initialValues: { name: '', type: '' },
     onSubmit: async (values, { setSubmitting }) => {
       try {
