@@ -29,6 +29,8 @@ yarn install
 yarn start
 ```
 
+Fake login: **admin/admin**
+
 ### To run jest tests
 
 ```
