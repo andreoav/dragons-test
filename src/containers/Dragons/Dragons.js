@@ -8,7 +8,7 @@ import { CreateDragon } from './Create';
 import { DragonDetails } from './Details';
 import { useAuthContext, ACTIONS } from 'providers/Auth';
 
-export default function Dashboard() {
+export default function DragonsContainer() {
   const [authState, authDispatch] = useAuthContext();
   const [{ isAuthenticated }] = useSessionStorage('dragons.auth', authState);
 

@@ -10,6 +10,7 @@ import { Card } from 'components/Card';
 import { Text } from 'components/Text';
 import { Title } from 'components/Title';
 import { Button } from 'components/Button';
+import { alphabeticallySort } from 'utils/sort';
 
 export default function DragonsList() {
   const { isAuthenticated } = useAuthState();
@@ -31,25 +32,27 @@ export default function DragonsList() {
         <Icon name="fas fa-plus" className="mr-2" /> New dragon
       </Button>
       <div className="flex flex-wrap -m-2">
-        {data.map(dragon => (
-          <div key={dragon.id} className="w-full md:w-1/3 p-2 cursor-pointer" role="list">
-            <Card role="listitem">
-              <Card.Content onClick={() => navigate(`dragons/${dragon.id}`)} className="flex items-center">
-                <Text className="text-xl">
-                  <strong>{dragon.name}</strong>
-                </Text>
-              </Card.Content>
-              <Card.Footer>
-                <Button onClick={() => navigate(`dragons/${dragon.id}/edit`)} className="p-2 sm:p-4 text-center">
-                  <Icon name="far fa-edit" className="mr-2" /> Edit
-                </Button>
-                <Button onClick={() => handleRemoveDragon(dragon.id)} className="p-2 sm:p-4 text-center is-danger">
-                  <Icon name="far fa-trash-alt" className="mr-2" /> Remove
-                </Button>
-              </Card.Footer>
-            </Card>
-          </div>
-        ))}
+        {data
+          .sort((a, b) => alphabeticallySort(a.name, b.name))
+          .map(dragon => (
+            <div key={dragon.id} className="w-full sm:w-1/2 lg:w-1/3 p-2 cursor-pointer" role="list">
+              <Card role="listitem">
+                <Card.Content onClick={() => navigate(`dragons/${dragon.id}`)} className="flex items-center">
+                  <Text className="text-xl">
+                    <strong>{dragon.name}</strong>
+                  </Text>
+                </Card.Content>
+                <Card.Footer>
+                  <Button onClick={() => navigate(`dragons/${dragon.id}/edit`)} className="p-2 sm:p-4 text-center">
+                    <Icon name="far fa-edit" className="mr-2" /> Edit
+                  </Button>
+                  <Button onClick={() => handleRemoveDragon(dragon.id)} className="p-2 sm:p-4 text-center is-danger">
+                    <Icon name="far fa-trash-alt" className="mr-2" /> Remove
+                  </Button>
+                </Card.Footer>
+              </Card>
+            </div>
+          ))}
       </div>
     </React.Fragment>
   );

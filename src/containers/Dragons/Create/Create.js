@@ -58,7 +58,7 @@ export default function CreateDragon() {
                 className={classNames({ 'with-error': formik.touched.type && formik.errors.type })}
               />
             </div>
-            <Button type="submit" className="w-full" disabled={formik.isSubmitting}>
+            <Button type="submit" className="w-full" disabled={formik.isSubmitting} data-testid="create-dragon">
               Create
             </Button>
           </form>

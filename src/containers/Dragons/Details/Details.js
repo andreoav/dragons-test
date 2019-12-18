@@ -17,7 +17,7 @@ export default function DragonDetails({ dragonId }) {
 
   async function handleRemoveDragon(dragonId) {
     await removeDragon(dragonId);
-    await navigate('/dragons', { replace: true });
+    await navigate('/dragons');
   }
 
   return dragon ? (

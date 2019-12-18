@@ -17,7 +17,7 @@ export function ListSkeleton({ count = 6 }) {
       </Button>
       <div className="flex flex-wrap -m-2">
         {[...Array(count).keys()].map((_, i) => (
-          <div key={i} className="w-full md:w-1/3 p-2 cursor-pointer">
+          <div key={i} className="w-full sm:w-1/2 lg:w-1/3 p-2 cursor-pointer">
             <Card>
               <Card.Content className="flex items-center">
                 <Text className="text-xl">
